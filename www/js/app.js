@@ -78,6 +78,8 @@
 							$('#recon').toggle();						
 							$('#disc').toggle();
 							$('#info').addClass('info');
+							navigator.notification.vibrate(500);
+							navigator.notification.beep(3);
 							snd.play();
 
 							
