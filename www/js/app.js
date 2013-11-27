@@ -15,6 +15,7 @@
 		var order_id= 0;
 		var channel = '';
 		var moto_id = 0;
+        var snd = new Media("../resources/sounds/ahooga.wav");
 			
 		db = openDatabase(shortName, version, displayName,maxSize);
 		db.transaction(function(transaction) {
@@ -67,12 +68,20 @@
 		        url: 'http://api.domimoto.com/availableUser',
 		        success: function(data){
 					if(data.status == 'ok'){
-						$('#connectionStatus').text( "Disponible." );
+						$('#recon').removeClass("inactivo");						
+						$('#disc').addClass("inactivo");
 					    channel = pusher.subscribe('order@'+moto_id);
 					    channel.bind('order', function(data) {
-							$('#info_orden').html('<ul id="info"><li>Dirección Recogida:' + data.order.pickupaddress + '</li><li>Nombre Restaurante:' + data.order.pickupname + '</li><li>Dirección Entrega:' + data.order.deliveraddress + '</li><li>Nombre Entrega:' + data.order.delivername + '</li><li>Productos:' + data.order.content + '</li><li>Precio Productos:' + data.order.value + '</li></lu>');
+							$('#info_orden').html('<ul id="info"><li><span>Dirección Recogida:</span>' + data.order.pickupaddress + '</li><li><span>Nombre Restaurante:</span>' + data.order.pickupname + '</li><li><span>Dirección Entrega:</span>' + data.order.deliveraddress + '</li><li><span>Nombre Entrega:</span>' + data.order.delivername + '</li><li><span>Productos:</span>' + data.order.content + '</li><li><span>Precio Productos:</span>' + data.order.value + '</li></lu>');
 							$('#aceptar').toggle();
 							$('#rechazar').toggle();
+							$('#recon').toggle();						
+							$('#disc').toggle();
+							$('#info').addClass('info');
+							snd.play();
+
+							
+							
 					    	order_id = data.order.id;
 					    });
 					}
@@ -97,7 +106,8 @@
 		        url: 'http://api.domimoto.com/unavailableUser',
 		        success: function(data){
 		            if(data.status == 'ok'){
-            			$('#connectionStatus').text( "No Disponible.");	
+						$('#recon').addClass("inactivo");						
+						$('#disc').removeClass("inactivo");
 		            }
 		            console.log('Your request was succesfully sent');
 		        },
@@ -118,8 +128,6 @@
 		        success: function(data){						
 		        	if(data.status == 'ok'){
 						alert('La orden fue aceptada su usuario la esta esperando :3');		        		
-			        	$('#recon').toggle();
-						$('#disc').toggle();
 						$('#completar').toggle();						
 		        	}
 		        	else{
@@ -165,6 +173,9 @@
 			$('#info_orden').empty();
         	$('#aceptar').toggle();
 			$('#rechazar').toggle();
+			$('#recon').toggle();
+			$('#disc').toggle();
+
 		}	
 
 		function handleMyEvent(data) {

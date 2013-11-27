@@ -9,18 +9,18 @@
 		<title>Pusher Example</title>
 	</head>
 	<body>
-		<h1>DomiMoto</h1>
-		<div id="deviceProperties"></div>
-		<label>Estado: </label><span id="connectionStatus">No Disponible</span><br />
+		<h1 id="logo">DomiMoto</h1>
 		
 		<div id="info_orden"></div>
 		<div id="ordenes"></div>
-		<button class="oculto" id="completar">Completar Orden</button> <br />
-		<button class="oculto" id="aceptar">Aceptar Orden</button> <br />
-		<button class="oculto" id="rechazar">Rechazar Orden</button> <br />
-		<button id="recon">Disponible</button> <br />
-		<button id="disc">No Disponible</button> <br />
-		<button id="logOut">Salir</button> <br />
+		<div class="botonera">
+			<button class="oculto botones aceptar" id="completar">Completar Orden</button> <br />
+			<button class="oculto botones aceptar" id="aceptar">Aceptar Orden</button> <br />
+			<button class="oculto botones unavailable" id="rechazar">Rechazar Orden</button> <br />
+			<button class="botones available inactivo" id="recon">Disponible</button> <br />
+			<button class="botones unavailable inactivo" id="disc">No Disponible</button> <br />
+			<button class="botones exit" id="logOut">Salir</button> <br />
+		</div>
     <script type="text/javascript">
         app.initialize();
     </script>
