@@ -15,7 +15,6 @@
 		var order_id= 0;
 		var channel = '';
 		var moto_id = 0;
-        var snd = new Media("../resources/sounds/ahooga.wav");
 			
 		db = openDatabase(shortName, version, displayName,maxSize);
 		db.transaction(function(transaction) {
@@ -79,8 +78,6 @@
 							$('#disc').toggle();
 							$('#info').addClass('info');
 							navigator.notification.vibrate(500);
-							navigator.notification.beep(3);
-							snd.play();
 
 							
 							
